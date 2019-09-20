@@ -163,8 +163,9 @@ boolean PubSubClient::connect(const char *id, const char *user, const char *pass
 
             buffer[length++] = v;
 
-            buffer[length++] = ((MQTT_KEEPALIVE) >> 8);
-            buffer[length++] = ((MQTT_KEEPALIVE) & 0xFF);
+            // Let the broker use a different (longer) timeout than the client
+            buffer[length++] = ((MQTT_KEEPALIVE_BROKER) >> 8);
+            buffer[length++] = ((MQTT_KEEPALIVE_BROKER) & 0xFF);
 
             CHECK_STRING_LENGTH(length,id)
             length = writeString(id,buffer,length);
